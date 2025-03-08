@@ -17,7 +17,7 @@ export class StoresAdminController {
   constructor(private userService: UserService) {}
 
   @Get()
-  async getPartners(@Query() query: any, @LoggedUser() user: User) {
+  async getPartners(@Query() query: any) {
     const options = {
       ...query,
       filter: {
@@ -28,10 +28,7 @@ export class StoresAdminController {
   }
 
   @Get(':partner_id')
-  async getPartnerById(
-    @Param('partner_id') partnerId: string,
-    @LoggedUser() user: User,
-  ) {
+  async getPartnerById(@Param('partner_id') partnerId: string) {
     const partner = await this.userService.getPartnerById(partnerId);
     // const isAdmin = isItemAdmin(partner, user);
     // if (!isAdmin) throw new AuthorizationError('Action not allowed');

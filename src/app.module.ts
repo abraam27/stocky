@@ -4,6 +4,8 @@ import { UsersModule } from './users/users.module';
 import { MongoosePluggedModule } from './common/db';
 import { AppConfigs } from './app-configs';
 import { StoresModule } from './stores/stores.module';
+import { OrdersModule } from './orders/orders.module';
+import { CustomersModule } from './customers/customers.module';
 
 @Global()
 @Module({
@@ -11,6 +13,8 @@ import { StoresModule } from './stores/stores.module';
     MongoosePluggedModule.forRoot(AppConfigs.mongoDbUri),
     UsersModule,
     StoresModule,
+    OrdersModule,
+    CustomersModule,
   ],
   providers: [],
   exports: [],

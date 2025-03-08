@@ -1,13 +1,9 @@
-import { Logger } from '@nestjs/common';
 import { isNotEmpty, isNumber } from 'class-validator';
 import { writeFile } from 'fs';
 import * as _ from 'lodash';
 import * as _uuid from 'uuid';
 
 import { UUID_NAMESPACE } from './constants';
-
-const logger = new Logger('common/utils');
-
 export function uuid(seed?: string): string {
   return isNotEmpty(seed) ? _uuid.v5(seed, UUID_NAMESPACE) : _uuid.v6();
 }
@@ -92,18 +88,6 @@ export function generateRandomChars(length: number): string {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
-
-export function deepFreeze(object: object) {
-  // Recursively freeze nested objects
-  _.forEach(object, function (value, _key) {
-    if (_.isObject(value) && !Object.isFrozen(value)) {
-      deepFreeze(value);
-    }
-  });
-
-  // Freeze the object itself
-  return Object.freeze(object);
 }
 
 export function executeMathOperation(

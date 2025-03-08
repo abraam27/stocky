@@ -9,12 +9,12 @@ import {
   Query,
 } from '@nestjs/common';
 import { LoggedUser } from 'src/common/decorators/genwin';
+import { OrderService } from '../services/order.service';
 import { User } from 'src/users/dtos/user.dto';
-import { StoreService } from '../services/store.service';
 
-@Controller('admin-api/stores')
-export class StoresAdminController {
-  constructor(private storeService: StoreService) {}
+@Controller('admin-api/orders')
+export class OrdersAdminController {
+  constructor(private orderService: OrderService) {}
 
   @Get()
   async getPartners(@Query() query: any) {
@@ -24,12 +24,12 @@ export class StoresAdminController {
         ...query,
       },
     };
-    return await this.storeService.getPartners(options);
+    return await this.orderService.getOrders(options);
   }
 
-  @Get(':partner_id')
-  async getPartnerById(@Param('partner_id') partnerId: string) {
-    const partner = await this.storeService.getPartnerById(partnerId);
+  @Get(':order_id')
+  async getPartnerById(@Param('order_id') orderId: string) {
+    const partner = await this.orderService.getOrderById(orderId);
     // const isAdmin = isItemAdmin(partner, user);
     // if (!isAdmin) throw new AuthorizationError('Action not allowed');
     return partner;
@@ -37,23 +37,23 @@ export class StoresAdminController {
 
   @Post()
   async create(@Body() body: any, @LoggedUser() user: User) {
-    return await this.storeService.createUser(body, user);
+    return await this.orderService.createOrder(body, user);
   }
 
-  @Put(':partner_id')
+  @Put(':order_id')
   async updatePartner(
-    @Param('partner_id') partnerId: string,
+    @Param('order_id') orderId: string,
     @Body() body: any,
     @LoggedUser() user: User,
   ) {
-    return await this.storeService.updateUser(partnerId, body, user);
+    return await this.orderService.updateOrder(orderId, body, user);
   }
 
-  @Delete(':partner_id')
+  @Delete(':order_id')
   async deletePartner(
-    @Param('partner_id') partnerId: string,
+    @Param('order_id') orderId: string,
     @LoggedUser() user: User,
   ) {
-    return await this.storeService.deleteUser(partnerId, user);
+    return await this.orderService.deleteOrder(orderId, user);
   }
 }
