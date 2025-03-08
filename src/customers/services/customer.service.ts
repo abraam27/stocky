@@ -50,10 +50,10 @@ export class CustomerService {
   }
 
   async getCustomerById(customerId: string) {
-    const partner = await this.customerRepository.findById(customerId);
-    if (!partner)
-      throw new NotFoundException(`Partner with ID ${customerId} not found`);
-    return partner;
+    const customer = await this.customerRepository.findById(customerId);
+    if (!customer)
+      throw new NotFoundException(`customer with ID ${customerId} not found`);
+    return customer;
   }
 
   async createCustomer(dto: CreateCustomerDto, user: User) {

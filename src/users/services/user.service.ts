@@ -10,7 +10,7 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) { }
+  constructor(private readonly userRepository: UserRepository) {}
 
   async getUsers(options: MongoDbFindOptions<any>) {
     const query: FilterQuery<User> = {};
@@ -52,8 +52,7 @@ export class UserService {
 
   async getUserById(userId: string) {
     const user = await this.userRepository.findById(userId);
-    if (!user)
-      throw new NotFoundException(`User with ID ${userId} not found`);
+    if (!user) throw new NotFoundException(`User with ID ${userId} not found`);
     return user;
   }
 
@@ -61,7 +60,10 @@ export class UserService {
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
     const hashedPassword = await bcrypt.hash(dto.password, 10);
-    return await this.userRepository.createUser({...dto, password: hashedPassword});
+    return await this.userRepository.createUser({
+      ...dto,
+      password: hashedPassword,
+    });
   }
 
   async updateUser(userId: string, dto: UpdateUserDto, user: User) {

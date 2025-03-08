@@ -18,9 +18,6 @@ export class Customer {
   @Prop({ required: true, type: String })
   phone: string;
 
-  @Prop({ required: false, type: [String], default: [] })
-  orders: string[];
-
   @Prop({ required: true, type: String })
   saved_by: string;
 }

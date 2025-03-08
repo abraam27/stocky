@@ -13,7 +13,12 @@ export type OrderDocument = HydratedDocument<Order>;
   },
 })
 export class Order {
-  @Prop({ required: true, type: String, enum: OrderStatus })
+  @Prop({
+    required: true,
+    type: String,
+    enum: OrderStatus,
+    default: OrderStatus.Completed,
+  })
   status: OrderStatus;
 
   @Prop({ required: false, type: String })
@@ -30,6 +35,9 @@ export class Order {
 
   @Prop({ required: true, type: Number, default: 0 })
   discount: number;
+
+  @Prop({ required: true, type: Number, default: 0 })
+  discount_value: number;
 
   @Prop({ required: true, type: Number })
   subtotal: number;

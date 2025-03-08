@@ -9,7 +9,7 @@ import {
 
 @Injectable()
 export abstract class MongoRepo<Entity extends Document> {
-  constructor(protected readonly model: Model<Entity>) { }
+  constructor(protected readonly model: Model<Entity>) {}
 
   async find(
     query: FilterQuery<Entity>,
@@ -19,9 +19,13 @@ export abstract class MongoRepo<Entity extends Document> {
   }
 
   async findById(id: string, options?: QueryOptions): Promise<Entity> {
-    return this.model.findById(id, {
-      password: 0
-    }, options);
+    return this.model.findById(
+      id,
+      {
+        password: 0,
+      },
+      options,
+    );
   }
 
   async findOne(

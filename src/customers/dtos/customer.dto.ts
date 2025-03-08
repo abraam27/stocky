@@ -10,11 +10,6 @@ export class CreateCustomerDto {
   @IsNotEmpty()
   phone: string;
 
-  @IsArray()
-  @IsString({ each: true })
-  @IsNotEmpty()
-  orders: string[];
-
   @IsString()
   @IsNotEmpty()
   saved_by: string;

@@ -11,13 +11,15 @@ import {
 import { LoggedUser } from 'src/common/decorators/genwin';
 import { OrderService } from '../services/order.service';
 import { User } from 'src/users/dtos/user.dto';
+import { isAdmin, isStoreItem } from 'src/common/constants';
+import { AuthorizationError } from 'src/common/exceptions';
 
-@Controller('admin-api/orders')
+@Controller('api/orders')
 export class OrdersAdminController {
   constructor(private orderService: OrderService) {}
 
   @Get()
-  async getPartners(@Query() query: any) {
+  async getOrders(@Query() query: any, @LoggedUser() user: User) {
     const options = {
       ...query,
       filter: {
@@ -28,11 +30,14 @@ export class OrdersAdminController {
   }
 
   @Get(':order_id')
-  async getPartnerById(@Param('order_id') orderId: string) {
-    const partner = await this.orderService.getOrderById(orderId);
-    // const isAdmin = isItemAdmin(partner, user);
-    // if (!isAdmin) throw new AuthorizationError('Action not allowed');
-    return partner;
+  async getOrderById(
+    @Param('order_id') orderId: string,
+    @LoggedUser() user: User,
+  ) {
+    const order = await this.orderService.getOrderById(orderId);
+    const _isAdmin = isStoreItem(order, user);
+    if (!_isAdmin) throw new AuthorizationError('Action not allowed');
+    return order;
   }
 
   @Post()
@@ -41,7 +46,7 @@ export class OrdersAdminController {
   }
 
   @Put(':order_id')
-  async updatePartner(
+  async updateOrder(
     @Param('order_id') orderId: string,
     @Body() body: any,
     @LoggedUser() user: User,
@@ -50,7 +55,7 @@ export class OrdersAdminController {
   }
 
   @Delete(':order_id')
-  async deletePartner(
+  async deleteOrder(
     @Param('order_id') orderId: string,
     @LoggedUser() user: User,
   ) {

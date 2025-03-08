@@ -44,4 +44,5 @@ export declare type User = {
   phone?: string;
   role: UserRole;
   active: boolean;
+  store_id: string;
 };

@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "f985e725-8441-4b31-929e-4f17d689f783",
+		"name": "Stocky",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25543766"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"owner\",\r\n  \"password\": \"123456\",\r\n  \"email\": \"abraam@example.com\",\r\n  \"phone\": \"0127\",\r\n  \"role\": \"owner\",\r\n  \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/admin-api/users/:user_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"admin-api",
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "67cbfdbac29bd34d0f9f9f3e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"owner\",\r\n  \"password\": \"123456\",\r\n  \"email\": \"abraam@example.com\",\r\n  \"phone\": \"0127\",\r\n  \"role\": \"owner\",\r\n  \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/products/:product_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								":product_id"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "67cc20874f3d55c5c242572d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/products/:product_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								":product_id"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "67cc20874f3d55c5c242572d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "create order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNDI0NTE5fQ.rNdFWrn0CWpRROjNvNTxXerCj6KmAazyO-YsMAj9nHY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_id\": \"64f1b2c8e4b0d1a2b3c4d5e1\",\r\n  \"user_id\": \"64f1b2c8e4b0d1a2b3c4d5e2\",\r\n  \"store_id\": \"64f1b2c8e4b0d1a2b3c4d5e3\",\r\n  \"products\": [\r\n    {\r\n      \"product_id\": \"64f1b2c8e4b0d1a2b3c4d5e4\",\r\n      \"quantity\": 2,\r\n      \"price\": 30\r\n    },\r\n    {\r\n      \"product_id\": \"64f1b2c8e4b0d1a2b3c4d5e5\",\r\n      \"quantity\": 1,\r\n      \"price\": 100\r\n    }\r\n  ],\r\n  \"discount\": 10,\r\n  \"discount_value\": 44,\r\n  \"payment_method\": \"cash\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": []
+		},
+		{
+			"name": "Stores",
+			"item": []
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"owner\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/auth-api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"auth-api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -12,12 +12,12 @@ import { LoggedUser } from 'src/common/decorators/genwin';
 import { ProductService } from '../services/product.service';
 import { User } from 'src/users/dtos/user.dto';
 
-@Controller('admin-api/products')
+@Controller('api/products')
 export class ProductsAdminController {
   constructor(private productService: ProductService) {}
 
   @Get()
-  async getPartners(@Query() query: any) {
+  async getProducts(@Query() query: any) {
     const options = {
       ...query,
       filter: {
@@ -28,11 +28,9 @@ export class ProductsAdminController {
   }
 
   @Get(':product_id')
-  async getPartnerById(@Param('product_id') ProductId: string) {
-    const partner = await this.productService.getProductById(ProductId);
-    // const isAdmin = isItemAdmin(partner, user);
-    // if (!isAdmin) throw new AuthorizationError('Action not allowed');
-    return partner;
+  async getProductById(@Param('product_id') ProductId: string) {
+    const Product = await this.productService.getProductById(ProductId);
+    return Product;
   }
 
   @Post()
@@ -41,7 +39,7 @@ export class ProductsAdminController {
   }
 
   @Put(':product_id')
-  async updatePartner(
+  async updateProduct(
     @Param('product_id') ProductId: string,
     @Body() body: any,
     @LoggedUser() user: User,
@@ -50,7 +48,7 @@ export class ProductsAdminController {
   }
 
   @Delete(':product_id')
-  async deletePartner(
+  async deleteProduct(
     @Param('product_id') ProductId: string,
     @LoggedUser() user: User,
   ) {

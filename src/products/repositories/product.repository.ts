@@ -32,55 +32,24 @@ export class ProductRepository extends MongoRepo<ProductDocument> {
   }
 
   async createProduct(data: Partial<Product>) {
-    const session = await this.model.startSession();
-    session.startTransaction();
-    try {
-      const [partner] = await this.model.create([data], { session });
-      await session.commitTransaction();
-      return partner.toObject();
-    } catch (error) {
-      await session.abortTransaction();
-      throw error;
-    } finally {
-      await session.endSession();
-    }
+    const [product] = await this.model.create([data]);
+    return product.toObject();
   }
 
   async updateProductById(
     _id: Types.ObjectId | string,
     data: Partial<Product>,
   ) {
-    const session = await this.model.startSession();
-    session.startTransaction();
-    try {
-      const partner = await this.model.findOneAndUpdate({ _id }, data, {
-        session,
-        new: true,
-      });
-      if (!partner) return null;
-      await session.commitTransaction();
-      return partner.toObject();
-    } catch (error) {
-      await session.abortTransaction();
-      throw error;
-    } finally {
-      await session.endSession();
-    }
+    const product = await this.model.findOneAndUpdate({ _id }, data, {
+      new: true,
+    });
+    if (!product) return null;
+    return product.toObject();
   }
 
   async deleteProductById(_id: Types.ObjectId | string) {
-    const session = await this.model.startSession();
-    session.startTransaction();
-    try {
-      const partner = await this.model.findOneAndDelete({ _id }, { session });
-      if (!partner) return null;
-      await session.commitTransaction();
-      return partner.toObject();
-    } catch (error) {
-      await session.abortTransaction();
-      throw error;
-    } finally {
-      await session.endSession();
-    }
+    const product = await this.model.findOneAndDelete({ _id });
+    if (!product) return null;
+    return product.toObject();
   }
 }

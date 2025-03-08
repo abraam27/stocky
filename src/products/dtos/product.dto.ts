@@ -47,7 +47,7 @@ export class CreateProductDto {
   quantity?: number;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   saved_by: string;
 
   @IsString()

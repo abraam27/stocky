@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { transaction as Transaction } from './transactions.schema';
 
 export type StoreDocument = HydratedDocument<Store>;
 
@@ -24,9 +23,6 @@ export class Store {
 
   @Prop({ required: false, type: Number, default: 0 })
   cashInVault: number;
-
-  @Prop({ required: false, type: [Transaction], default: [] })
-  transactions: Transaction[];
 }
 
 const StoreSchema = SchemaFactory.createForClass(Store);

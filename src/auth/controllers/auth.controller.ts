@@ -6,7 +6,10 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  async login(@Body('username') username: string, @Body('password') password: string) {
+  async login(
+    @Body('username') username: string,
+    @Body('password') password: string,
+  ) {
     try {
       const result = await this.authService.login(username, password);
       return result;

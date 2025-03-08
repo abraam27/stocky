@@ -11,7 +11,10 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(username: string, password: string): Promise<{ message: string; token: string }> {
+  async login(
+    username: string,
+    password: string,
+  ): Promise<{ message: string; token: string }> {
     const user = await this.userService.findOneByUsername(username);
 
     if (!user) {
@@ -44,7 +47,7 @@ export class AuthService {
         secret: AppConfigs.tokenSignature,
       });
       const user = await this.userService.getUserById(decoded.userID);
-      if(!user) throw new UnauthorizedException('Invalid')
+      if (!user) throw new UnauthorizedException('Invalid');
       return user;
     } catch (error) {
       throw new UnauthorizedException('Invalid or expired token');

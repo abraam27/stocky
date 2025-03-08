@@ -16,4 +16,4 @@ import { AppConfigs } from 'src/app-configs';
   controllers: [AuthController],
   providers: [AuthService, UserService],
 })
-export class AuthModule { }
+export class AuthModule {}

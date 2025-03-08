@@ -17,43 +17,43 @@ export class StoresAdminController {
   constructor(private storeService: StoreService) {}
 
   @Get()
-  async getPartners(@Query() query: any) {
+  async getStores(@Query() query: any) {
     const options = {
       ...query,
       filter: {
         ...query,
       },
     };
-    return await this.storeService.getPartners(options);
+    return await this.storeService.getStores(options);
   }
 
-  @Get(':partner_id')
-  async getPartnerById(@Param('partner_id') partnerId: string) {
-    const partner = await this.storeService.getPartnerById(partnerId);
-    // const isAdmin = isItemAdmin(partner, user);
+  @Get(':Store_id')
+  async getStoreById(@Param('Store_id') StoreId: string) {
+    const Store = await this.storeService.getStoreById(StoreId);
+    // const isAdmin = isItemAdmin(Store, user);
     // if (!isAdmin) throw new AuthorizationError('Action not allowed');
-    return partner;
+    return Store;
   }
 
   @Post()
   async create(@Body() body: any, @LoggedUser() user: User) {
-    return await this.storeService.createUser(body, user);
+    return await this.storeService.createStore(body, user);
   }
 
-  @Put(':partner_id')
-  async updatePartner(
-    @Param('partner_id') partnerId: string,
+  @Put(':Store_id')
+  async updateStore(
+    @Param('Store_id') StoreId: string,
     @Body() body: any,
     @LoggedUser() user: User,
   ) {
-    return await this.storeService.updateUser(partnerId, body, user);
+    return await this.storeService.updateStore(StoreId, body, user);
   }
 
-  @Delete(':partner_id')
-  async deletePartner(
-    @Param('partner_id') partnerId: string,
+  @Delete(':store_id')
+  async deleteStore(
+    @Param('store_id') storeId: string,
     @LoggedUser() user: User,
   ) {
-    return await this.storeService.deleteUser(partnerId, user);
+    return await this.storeService.deleteStore(storeId, user);
   }
 }

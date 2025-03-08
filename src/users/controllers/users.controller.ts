@@ -14,12 +14,14 @@ import { LoggedUser } from 'src/common/decorators/genwin';
 import { isOwner } from 'src/common/constants';
 import { AuthorizationError } from 'src/common/exceptions';
 
-@Controller('admin-api/users')
-export class StoresAdminController {
+@Controller('api/users')
+export class UsersAdminController {
   constructor(private userService: UserService) {}
 
   @Get()
-  async getUsers(@Query() query: any) {
+  async getUsers(@Query() query: any, @LoggedUser() user: User) {
+    const _isOwner = isOwner(user);
+    if (!_isOwner) throw new AuthorizationError('Action not allowed');
     const options = {
       ...query,
       filter: {
@@ -30,10 +32,13 @@ export class StoresAdminController {
   }
 
   @Get('/:user_id')
-  async getUserById(@Param('user_id') userId: string, @LoggedUser() user: User) {
-    const _user = await this.userService.getUserById(userId);
+  async getUserById(
+    @Param('user_id') userId: string,
+    @LoggedUser() user: User,
+  ) {
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
+    const _user = await this.userService.getUserById(userId);
     return _user;
   }
 
@@ -52,10 +57,7 @@ export class StoresAdminController {
   }
 
   @Delete(':user_id')
-  async deleteUser(
-    @Param('user_id') UserId: string,
-    @LoggedUser() user: User,
-  ) {
+  async deleteUser(@Param('user_id') UserId: string, @LoggedUser() user: User) {
     return await this.userService.deleteUser(UserId, user);
   }
 }

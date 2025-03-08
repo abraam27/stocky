@@ -4,14 +4,14 @@ import { MongoDbFindOptions } from 'src/common/db';
 import { isOwner } from 'src/common/constants';
 import { AuthorizationError } from 'src/common/exceptions';
 import { StoreRepository } from '../repositories/store.repository';
-import { Store } from '../schemas/store.schema';
-import { User } from 'src/users/dtos/user.dto';
 import { CreateStoreDto, UpdateStoreDto } from '../dtos/store.dto';
+import { User } from 'src/users/dtos/user.dto';
+import { Store } from '../schemas/store.schema';
 @Injectable()
 export class StoreService {
   constructor(private readonly storeRepository: StoreRepository) {}
 
-  async getPartners(options: MongoDbFindOptions<any>) {
+  async getStores(options: MongoDbFindOptions<any>) {
     const query: FilterQuery<Store> = {};
 
     if (options.filter?._id) {
@@ -49,43 +49,39 @@ export class StoreService {
     });
   }
 
-  async getPartnerById(partnerId: string) {
-    const partner = await this.storeRepository.findById(partnerId);
-    if (!partner)
-      throw new NotFoundException(`Partner with ID ${partnerId} not found`);
-    return partner;
+  async getStoreById(storeId: string) {
+    const store = await this.storeRepository.findById(storeId);
+    if (!store)
+      throw new NotFoundException(`Store with ID ${storeId} not found`);
+    return store;
   }
 
-  async createUser(dto: CreateStoreDto, user: User) {
+  async createStore(dto: CreateStoreDto, user: User) {
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
     return await this.storeRepository.createStore(dto);
   }
 
-  async updateUser(storeId: string, dto: UpdateStoreDto, user: User) {
-    const _user = await this.storeRepository.findById(storeId);
-    if (!_user)
-      throw new NotFoundException(`User with ID ${storeId} not found`);
+  async updateStore(storeId: string, dto: UpdateStoreDto, user: User) {
+    const store = await this.storeRepository.findById(storeId);
+    if (!store)
+      throw new NotFoundException(`Store with ID ${storeId} not found`);
 
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
 
-    return await this.storeRepository.updateStoreById(_user._id, dto);
+    return await this.storeRepository.updateStoreById(store._id, dto);
   }
 
-  async deleteUser(storeId: string, user: User) {
-    const _user = await this.storeRepository.findById(storeId);
-    if (!_user)
-      throw new NotFoundException(`User with ID ${storeId} not found`);
+  async deleteStore(storeId: string, user: User) {
+    const store = await this.storeRepository.findById(storeId);
+    if (!store)
+      throw new NotFoundException(`Store with ID ${storeId} not found`);
 
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
 
-    await this.storeRepository.deleteStoreById(_user._id);
-    return { _id: _user._id };
-  }
-
-  async authenticate(token: string) {
-    return token;
+    await this.storeRepository.deleteStoreById(store._id);
+    return { _id: store._id };
   }
 }

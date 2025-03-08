@@ -22,22 +22,6 @@ export class ProductService {
       query.name = options.filter?.name;
     }
 
-    if (options.filter?.alias) {
-      query.alias = options.filter?.alias;
-    }
-
-    if (options.filter?.organization_id) {
-      query.organization_id = options.filter?.organization_id;
-    }
-
-    if (options.filter?.fund_raiser_id) {
-      query.fund_raiser_id = { $in: [options.filter?.fund_raiser_id, null] };
-    }
-
-    if (options.filter?.plaid_id) {
-      query['plaid.id'] = options.filter?.plaid_id;
-    }
-
     if (options?.filter?.key) {
       query.$or = [{ name: { $regex: options.filter.key, $options: 'i' } }];
     }
@@ -49,43 +33,42 @@ export class ProductService {
     });
   }
 
-  async getProductById(ProductId: string) {
-    const partner = await this.ProductRepository.findById(ProductId);
-    if (!partner)
-      throw new NotFoundException(`Partner with ID ${ProductId} not found`);
-    return partner;
+  async getProductById(productId: string) {
+    const product = await this.ProductRepository.findById(productId);
+    if (!product)
+      throw new NotFoundException(`Product with ID ${productId} not found`);
+    return product;
   }
 
   async createProduct(dto: CreateProductDto, user: User) {
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
-    return await this.ProductRepository.createProduct(dto);
+    return await this.ProductRepository.createProduct({
+      ...dto,
+      saved_by: user._id.toString(),
+    });
   }
 
-  async updateProduct(ProductId: string, dto: UpdateProductDto, user: User) {
-    const _Product = await this.ProductRepository.findById(ProductId);
-    if (!_Product)
-      throw new NotFoundException(`Product with ID ${ProductId} not found`);
+  async updateProduct(productId: string, dto: UpdateProductDto, user: User) {
+    const product = await this.ProductRepository.findById(productId);
+    if (!product)
+      throw new NotFoundException(`Product with ID ${productId} not found`);
 
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
 
-    return await this.ProductRepository.updateProductById(_Product._id, dto);
+    return await this.ProductRepository.updateProductById(product._id, dto);
   }
 
-  async deleteProduct(ProductId: string, user: User) {
-    const _Product = await this.ProductRepository.findById(ProductId);
-    if (!_Product)
-      throw new NotFoundException(`Product with ID ${ProductId} not found`);
+  async deleteProduct(productId: string, user: User) {
+    const product = await this.ProductRepository.findById(productId);
+    if (!product)
+      throw new NotFoundException(`Product with ID ${productId} not found`);
 
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
 
-    await this.ProductRepository.deleteProductById(_Product._id);
-    return { _id: _Product._id };
-  }
-
-  async authenticate(token: string) {
-    return token;
+    await this.ProductRepository.deleteProductById(product._id);
+    return { _id: product._id };
   }
 }

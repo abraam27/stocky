@@ -35,9 +35,9 @@ export class CustomerRepository extends MongoRepo<CustomerDocument> {
     const session = await this.model.startSession();
     session.startTransaction();
     try {
-      const [partner] = await this.model.create([data], { session });
+      const [customer] = await this.model.create([data], { session });
       await session.commitTransaction();
-      return partner.toObject();
+      return customer.toObject();
     } catch (error) {
       await session.abortTransaction();
       throw error;
@@ -53,13 +53,13 @@ export class CustomerRepository extends MongoRepo<CustomerDocument> {
     const session = await this.model.startSession();
     session.startTransaction();
     try {
-      const partner = await this.model.findOneAndUpdate({ _id }, data, {
+      const customer = await this.model.findOneAndUpdate({ _id }, data, {
         session,
         new: true,
       });
-      if (!partner) return null;
+      if (!customer) return null;
       await session.commitTransaction();
-      return partner.toObject();
+      return customer.toObject();
     } catch (error) {
       await session.abortTransaction();
       throw error;
@@ -72,10 +72,10 @@ export class CustomerRepository extends MongoRepo<CustomerDocument> {
     const session = await this.model.startSession();
     session.startTransaction();
     try {
-      const partner = await this.model.findOneAndDelete({ _id }, { session });
-      if (!partner) return null;
+      const customer = await this.model.findOneAndDelete({ _id }, { session });
+      if (!customer) return null;
       await session.commitTransaction();
-      return partner.toObject();
+      return customer.toObject();
     } catch (error) {
       await session.abortTransaction();
       throw error;

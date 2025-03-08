@@ -8,7 +8,7 @@ import { AuthService } from 'src/auth/services/auth.service';
 
 @Injectable()
 export class FetchUserMiddleware implements NestMiddleware {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   async use(req: Request, _: Response, next: NextFunction) {
     const token = this.getTokenFromRequest(req);

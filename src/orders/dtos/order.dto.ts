@@ -3,15 +3,17 @@ import { Type } from 'class-transformer';
 import {
   IsArray,
   IsEnum,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { type } from 'os';
 
 export enum OrderStatus {
   Completed = 'completed',
-  refunded = 'Refunded',
+  Refunded = 'refunded',
 }
 
 export enum PaymentMethod {
@@ -34,19 +36,18 @@ export class OrderProductDto {
 }
 
 export class CreateOrderDto {
-  @IsEnum(OrderStatus)
-  status: OrderStatus;
-
   @IsString()
   @IsOptional()
   customer_id?: string;
 
   @IsString()
-  user_id?: string;
+  @IsNotEmpty()
+  store_id?: string;
 
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => OrderProductDto)
+  @IsNotEmpty()
   products: OrderProductDto[];
 
   @IsNumber()
@@ -54,13 +55,28 @@ export class CreateOrderDto {
   discount?: number;
 
   @IsNumber()
-  subtotal: number;
-
-  @IsNumber()
-  total: number;
+  @IsOptional()
+  discount_value?: number;
 
   @IsEnum(PaymentMethod)
   @IsOptional()
   payment_method?: PaymentMethod;
 }
+
 export class UpdateOrderDto extends PartialType(CreateOrderDto) {}
+
+type BooleanAsString = 'true' | 'false';
+
+export type GetOrdersDto = {
+  _id?: string;
+  status?: string;
+  customer_id?: string;
+  user_id?: string;
+  store_id?: string;
+  limit?: number;
+  page?: number;
+  exactly?: BooleanAsString;
+  pagination?: boolean;
+  sort?: string | Record<string, 1 | -1>;
+  select?: string | Record<string, 0 | 1>;
+};

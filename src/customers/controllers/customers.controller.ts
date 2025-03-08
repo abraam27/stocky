@@ -12,12 +12,12 @@ import { LoggedUser } from 'src/common/decorators/genwin';
 import { User } from 'src/users/dtos/user.dto';
 import { CustomerService } from '../services/customer.service';
 
-@Controller('admin-api/customers')
+@Controller('api/customers')
 export class CustomersAdminController {
   constructor(private customerService: CustomerService) {}
 
   @Get()
-  async getPartners(@Query() query: any) {
+  async getCustomers(@Query() query: any) {
     const options = {
       ...query,
       filter: {
@@ -28,11 +28,11 @@ export class CustomersAdminController {
   }
 
   @Get(':customer_id')
-  async getPartnerById(@Param('customer_id') customerId: string) {
-    const partner = await this.customerService.getCustomerById(customerId);
-    // const isAdmin = isItemAdmin(partner, user);
+  async getCustomerById(@Param('customer_id') customerId: string) {
+    const customer = await this.customerService.getCustomerById(customerId);
+    // const isAdmin = isItemAdmin(Customer, user);
     // if (!isAdmin) throw new AuthorizationError('Action not allowed');
-    return partner;
+    return customer;
   }
 
   @Post()
@@ -41,7 +41,7 @@ export class CustomersAdminController {
   }
 
   @Put(':customer_id')
-  async updatePartner(
+  async updateCustomer(
     @Param('customer_id') customerId: string,
     @Body() body: any,
     @LoggedUser() user: User,
@@ -50,7 +50,7 @@ export class CustomersAdminController {
   }
 
   @Delete(':customer_id')
-  async deletePartner(
+  async deleteCustomer(
     @Param('customer_id') customerId: string,
     @LoggedUser() user: User,
   ) {
