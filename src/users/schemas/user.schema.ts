@@ -30,8 +30,12 @@ export class User {
 
   @Prop({ required: true, type: Boolean, default: true })
   active: boolean;
+
+  @Prop({ required: true, type: String })
+  store_id: string;
 }
 
 const UserSchema = SchemaFactory.createForClass(User);
 UserSchema.index({ username: 1 }, { unique: true });
+UserSchema.index({ store_id: 1 });
 export { UserSchema };

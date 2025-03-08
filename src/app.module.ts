@@ -6,6 +6,7 @@ import { AppConfigs } from './app-configs';
 import { StoresModule } from './stores/stores.module';
 import { OrdersModule } from './orders/orders.module';
 import { CustomersModule } from './customers/customers.module';
+import { ProductsModule } from './products/products.module';
 
 @Global()
 @Module({
@@ -15,6 +16,7 @@ import { CustomersModule } from './customers/customers.module';
     StoresModule,
     OrdersModule,
     CustomersModule,
+    ProductsModule,
   ],
   providers: [],
   exports: [],
