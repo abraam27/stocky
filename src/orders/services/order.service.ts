@@ -14,12 +14,14 @@ import {
   UpdateOrderDto,
 } from '../dtos/order.dto';
 import { StoreService } from 'src/stores/services/store.service';
+import { ProductService } from 'src/products/services/product.service';
 @Injectable()
 export class OrderService {
   constructor(
     private readonly OrderRepository: OrderRepository,
     private readonly storeService: StoreService,
-  ) {}
+    private readonly productService: ProductService,
+  ) { }
 
   async getOrders(options: MongoDbFindOptions<GetOrdersDto>) {
     const query: FilterQuery<Order> = {};
@@ -106,19 +108,41 @@ export class OrderService {
     return { _id: order._id };
   }
 
-  private calculateOrderTotals(order: Partial<Order>) {
-    // Calculate subtotal
-    order.subtotal = order.products.reduce(
-      (sum, product) => sum + product.quantity * product.price,
-      0,
-    );
+  private async calculateOrderTotals(
+    order: CreateOrderDto,
+  ): Promise<{ subtotal: number; total: number; totalDiscount: number; totalDiscountValue: number }> {
+    let subtotal = 0;
+    let totalDiscount = 0; // Total discount percentage applied
+    let totalDiscountValue = 0; // Total monetary value of discounts applied
 
-    // Calculate total after applying discount
-    order.total =
-      order.subtotal -
-      (order.subtotal * order.discount) / 100 -
-      order.discount_value;
+    // Calculate subtotal and product-level discounts
+    for (const product of order.products) {
+      const _product = await this.productService.getProductById(product.product_id);
+      const productTotal = _product.price * product.quantity;
+      const productDiscount = (productTotal * product.discount) / 100;
+      subtotal += productTotal - productDiscount;
 
-    return order;
+      // Accumulate product-level discounts
+      totalDiscount += product.discount;
+      totalDiscountValue += productDiscount;
+    }
+
+    // Apply overall order discount (if provided)
+    let total = subtotal;
+    if (order.discount !== undefined) {
+      const orderDiscountValue = (subtotal * order.discount) / 100;
+      total -= orderDiscountValue;
+
+      // Accumulate overall order discount
+      totalDiscount += order.discount;
+      totalDiscountValue += orderDiscountValue;
+    } else if (order.discount_value !== undefined) {
+      total -= order.discount_value;
+
+      // Accumulate overall order discount value
+      totalDiscountValue += order.discount_value;
+    }
+
+    return { subtotal, total, totalDiscount, totalDiscountValue };
   }
 }

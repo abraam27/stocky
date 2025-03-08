@@ -29,10 +29,10 @@ export class OrderProductDto {
   quantity: number;
 
   @IsNumber()
-  price: number;
+  discount: number;
 
   @IsNumber()
-  discount: number;
+  discount_value: number;
 }
 
 export class CreateOrderDto {

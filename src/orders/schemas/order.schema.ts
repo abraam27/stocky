@@ -45,6 +45,12 @@ export class Order {
   @Prop({ required: true, type: Number })
   total: number;
 
+  @Prop({ required: true, type: Number })
+  total_discount: number;
+
+  @Prop({ required: true, type: Number })
+  total_discount_value: number;
+
   @Prop({
     required: true,
     type: String,

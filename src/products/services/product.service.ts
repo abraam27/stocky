@@ -17,6 +17,10 @@ export class ProductService {
     if (options.filter?._id) {
       query._id = new Types.ObjectId(options.filter?._id);
     }
+    
+    if (options.filter?._ids) {
+      query._id = { $in: options.filter.ids.map(_id => new Types.ObjectId(_id)) };
+    }
 
     if (options.filter?.name) {
       query.name = options.filter?.name;
