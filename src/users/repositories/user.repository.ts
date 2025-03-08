@@ -32,52 +32,20 @@ export class UserRepository extends MongoRepo<UserDocument> {
   }
 
   async createUser(data: Partial<User>) {
-    const session = await this.model.startSession();
-    session.startTransaction();
-    try {
-      const [partner] = await this.model.create([data], { session });
-      await session.commitTransaction();
-      return partner.toObject();
-    } catch (error) {
-      await session.abortTransaction();
-      throw error;
-    } finally {
-      await session.endSession();
-    }
+    const [user] = await this.model.create([data]);
+    return user.toObject();
   }
 
   async updateUserById(_id: Types.ObjectId | string, data: Partial<User>) {
-    const session = await this.model.startSession();
-    session.startTransaction();
-    try {
-      const partner = await this.model.findOneAndUpdate({ _id }, data, {
-        session,
-        new: true,
-      });
-      if (!partner) return null;
-      await session.commitTransaction();
-      return partner.toObject();
-    } catch (error) {
-      await session.abortTransaction();
-      throw error;
-    } finally {
-      await session.endSession();
-    }
+    const user = await this.model.findOneAndUpdate({ _id }, data, {
+      new: true,
+    });
+    if (!user) return null;
   }
 
   async deleteUserById(_id: Types.ObjectId | string) {
-    const session = await this.model.startSession();
-    session.startTransaction();
-    try {
-      const partner = await this.model.findOneAndDelete({ _id }, { session });
-      if (!partner) return null;
-      await session.commitTransaction();
-      return partner.toObject();
-    } catch (error) {
-      await session.abortTransaction();
-      throw error;
-    } finally {
-      await session.endSession();
-    }
+    const user = await this.model.findOneAndDelete({ _id });
+    if (!user) return null;
+    return user.toObject();
   }
 }

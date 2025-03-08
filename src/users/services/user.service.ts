@@ -5,11 +5,14 @@ import { UserRepository } from '../repositories/user.repository';
 import { CreateUserDto, UpdateUserDto, User } from '../dtos/user.dto';
 import { isOwner } from 'src/common/constants';
 import { AuthorizationError } from 'src/common/exceptions';
+import { UserDocument } from '../schemas/user.schema';
+import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(private readonly userRepository: UserRepository) { }
 
-  async getPartners(options: MongoDbFindOptions<any>) {
+  async getUsers(options: MongoDbFindOptions<any>) {
     const query: FilterQuery<User> = {};
 
     if (options.filter?._id) {
@@ -47,17 +50,18 @@ export class UserService {
     });
   }
 
-  async getPartnerById(partnerId: string) {
-    const partner = await this.userRepository.findById(partnerId);
-    if (!partner)
-      throw new NotFoundException(`Partner with ID ${partnerId} not found`);
-    return partner;
+  async getUserById(userId: string) {
+    const user = await this.userRepository.findById(userId);
+    if (!user)
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    return user;
   }
 
   async createUser(dto: CreateUserDto, user: User) {
     const _isOwner = isOwner(user);
     if (!_isOwner) throw new AuthorizationError('Action not allowed');
-    return await this.userRepository.createUser(dto);
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
+    return await this.userRepository.createUser({...dto, password: hashedPassword});
   }
 
   async updateUser(userId: string, dto: UpdateUserDto, user: User) {
@@ -83,5 +87,9 @@ export class UserService {
 
   async authenticate(token: string) {
     return token;
+  }
+
+  async findOneByUsername(username: string): Promise<UserDocument> {
+    return await this.userRepository.findOne({ username });
   }
 }

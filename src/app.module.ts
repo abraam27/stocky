@@ -7,18 +7,26 @@ import { StoresModule } from './stores/stores.module';
 import { OrdersModule } from './orders/orders.module';
 import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/services/auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Global()
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, // Make the ConfigModule global
+    }),
     MongoosePluggedModule.forRoot(AppConfigs.mongoDbUri),
     UsersModule,
     StoresModule,
     OrdersModule,
     CustomersModule,
     ProductsModule,
+    AuthModule
   ],
-  providers: [],
+  providers: [AuthService, JwtService],
   exports: [],
 })
 export class AppModule implements NestModule {

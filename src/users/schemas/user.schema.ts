@@ -31,7 +31,7 @@ export class User {
   @Prop({ required: true, type: Boolean, default: true })
   active: boolean;
 
-  @Prop({ required: true, type: String })
+  @Prop({ required: false, type: String })
   store_id: string;
 }
 

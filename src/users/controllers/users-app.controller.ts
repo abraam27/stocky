@@ -1,22 +1,22 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 
-@Controller('app-api/partners')
+@Controller('app-api/users')
 export class StoresAppController {
   constructor(private readonly userService: UserService) {}
   @Get()
-  async getPartners(@Query() query: any) {
+  async getUsers(@Query() query: any) {
     const options = {
       ...query,
       filter: {
         ...query,
       },
     };
-    return await this.userService.getPartners(options);
+    return await this.userService.getUsers(options);
   }
 
-  @Get(':partner_id')
-  async getPartnerById(@Param('partner_id') partnerId: string) {
-    return await this.userService.getPartnerById(partnerId);
+  @Get(':user_id')
+  async getUserById(@Param('user_id') UserId: string) {
+    return await this.userService.getUserById(UserId);
   }
 }

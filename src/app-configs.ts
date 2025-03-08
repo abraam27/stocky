@@ -11,6 +11,10 @@ export class AppConfigs {
     return (process.env.APP_PORT && parseInt(process.env.APP_PORT)) ?? 8000;
   }
 
+  static get tokenSignature() {
+    return process.env.TOKEN_SIGNATURE;
+  }
+
   static get mongoDbUri() {
     const url = process.env.MONGO_URL;
     if (!url) {

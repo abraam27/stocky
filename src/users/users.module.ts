@@ -13,6 +13,6 @@ import { UserRepository } from './repositories/user.repository';
   ],
   controllers: [StoresAdminController, StoresAppController],
   providers: [UserService, UserRepository],
-  exports: [UserService],
+  exports: [UserService, UserRepository],
 })
 export class UsersModule {}
