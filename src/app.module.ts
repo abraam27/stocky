@@ -1,10 +1,17 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Global, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { FetchUserMiddleware } from './common/middleware';
+import { UsersModule } from './users/users.module';
+import { MongoosePluggedModule } from './common/db';
+import { AppConfigs } from './app-configs';
 
+@Global()
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [MongoosePluggedModule.forRoot(AppConfigs.mongoDbUri), UsersModule],
+  providers: [],
+  exports: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(FetchUserMiddleware).forRoutes('*');
+  }
+}
