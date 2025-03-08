@@ -8,13 +8,13 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { UserService } from '../services/user.service';
-import { User } from '../dtos/user.dto';
 import { LoggedUser } from 'src/common/decorators/genwin';
+import { User } from 'src/users/dtos/user.dto';
+import { StoreService } from '../services/store.service';
 
-@Controller('admin-api/partners')
+@Controller('admin-api/stores')
 export class StoresAdminController {
-  constructor(private userService: UserService) {}
+  constructor(private storeService: StoreService) {}
 
   @Get()
   async getPartners(@Query() query: any, @LoggedUser() user: User) {
@@ -24,7 +24,7 @@ export class StoresAdminController {
         ...query,
       },
     };
-    return await this.userService.getPartners(options);
+    return await this.storeService.getPartners(options);
   }
 
   @Get(':partner_id')
@@ -32,7 +32,7 @@ export class StoresAdminController {
     @Param('partner_id') partnerId: string,
     @LoggedUser() user: User,
   ) {
-    const partner = await this.userService.getPartnerById(partnerId);
+    const partner = await this.storeService.getPartnerById(partnerId);
     // const isAdmin = isItemAdmin(partner, user);
     // if (!isAdmin) throw new AuthorizationError('Action not allowed');
     return partner;
@@ -40,7 +40,7 @@ export class StoresAdminController {
 
   @Post()
   async create(@Body() body: any, @LoggedUser() user: User) {
-    return await this.userService.createUser(body, user);
+    return await this.storeService.createUser(body, user);
   }
 
   @Put(':partner_id')
@@ -49,7 +49,7 @@ export class StoresAdminController {
     @Body() body: any,
     @LoggedUser() user: User,
   ) {
-    return await this.userService.updateUser(partnerId, body, user);
+    return await this.storeService.updateUser(partnerId, body, user);
   }
 
   @Delete(':partner_id')
@@ -57,6 +57,6 @@ export class StoresAdminController {
     @Param('partner_id') partnerId: string,
     @LoggedUser() user: User,
   ) {
-    return await this.userService.deleteUser(partnerId, user);
+    return await this.storeService.deleteUser(partnerId, user);
   }
 }
