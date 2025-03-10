@@ -1,7 +1,7 @@
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
 import { Request } from 'express';
 import { omit } from 'lodash';
-import { User } from 'src/users/dtos/user.dto';
+import { User } from 'src/users/user.dto';
 
 export const LoggedUser = createParamDecorator(
   (data: string, ctx: ExecutionContext) => {

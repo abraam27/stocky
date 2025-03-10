@@ -9,7 +9,7 @@ import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { AuthService } from './auth/services/auth.service';
+import { AuthService } from './auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { TransactionsModule } from './transactions/transactions.module';
 

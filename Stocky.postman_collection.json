@@ -12,11 +12,21 @@
 				{
 					"name": "create user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"owner\",\r\n  \"password\": \"123456\",\r\n  \"email\": \"abraam@example.com\",\r\n  \"phone\": \"0127\",\r\n  \"role\": \"owner\",\r\n  \"active\": true\r\n}",
+							"raw": "{\r\n  \"username\": \"user2\",\r\n  \"password\": \"123456\",\r\n  \"email\": \"abraam@example.com\",\r\n  \"phone\": \"0127\",\r\n  \"role\": \"user\",\r\n  \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,10 +49,109 @@
 					"response": []
 				},
 				{
-					"name": "get user by id",
+					"name": "update user",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"987-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/:user_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "67cf0161be937d0df89e26da"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/:user_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "67cf0f6e0cc1c3e8e9c59a8c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNDI0NTE5fQ.rNdFWrn0CWpRROjNvNTxXerCj6KmAazyO-YsMAj9nHY",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -67,6 +176,43 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNDI0NTE5fQ.rNdFWrn0CWpRROjNvNTxXerCj6KmAazyO-YsMAj9nHY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "67cf0161be937d0df89e26da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -76,11 +222,99 @@
 				{
 					"name": "create product",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjI0NDE5fQ.jkyqC6xWjJ6YVX_uYcZH4RUXaLsaj_6kB93eyDL6Dmk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"owner\",\r\n  \"password\": \"123456\",\r\n  \"email\": \"abraam@example.com\",\r\n  \"phone\": \"0127\",\r\n  \"role\": \"owner\",\r\n  \"active\": true\r\n}",
+							"raw": "{\r\n  \"barcode_number\": \"1234567890123\",\r\n  \"name\": \"Men's Cotton T-Shirt\",\r\n  \"category\": \"Clothing\",\r\n  \"material\": \"Cotton\",\r\n  \"description\": \"A comfortable and stylish cotton T-shirt for men.\",\r\n  \"image_url\": \"https://example.com/images/mens-tshirt.jpg\",\r\n  \"brand\": \"FashionCo\",\r\n  \"product_variant\": [\r\n    {\r\n      \"sku\": 50,\r\n      \"cost_price\": 10,\r\n      \"selling_price\": 19,\r\n      \"discount_price\": 15,\r\n      \"color\": \"Blue\",\r\n      \"size\": \"M\",\r\n      \"in_stock\": true\r\n    },\r\n    {\r\n      \"sku\": 30,\r\n      \"cost_price\": 10,\r\n      \"selling_price\": 19,\r\n      \"discount_price\": null,\r\n      \"color\": \"Black\",\r\n      \"size\": \"L\",\r\n      \"in_stock\": true\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjI0NDE5fQ.jkyqC6xWjJ6YVX_uYcZH4RUXaLsaj_6kB93eyDL6Dmk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode_number\": \"1234567890123\",\r\n  \"name\": \"Men's Cotton T-Shirt\",\r\n  \"category\": \"Clothing\",\r\n  \"material\": \"Cotton\",\r\n  \"description\": \"A comfortable and stylish cotton T-shirt for men.\",\r\n  \"image_url\": \"https://example.com/images/mens-tshirt.jpg\",\r\n  \"brand\": \"FashionCo\",\r\n  \"product_variant\": [\r\n    {\r\n      \"sku\": 50,\r\n      \"cost_price\": 10,\r\n      \"selling_price\": 19,\r\n      \"discount_price\": 15,\r\n      \"color\": \"Blue\",\r\n      \"size\": \"M\",\r\n      \"in_stock\": true\r\n    },\r\n    {\r\n      \"sku\": 30,\r\n      \"cost_price\": 10,\r\n      \"selling_price\": 19,\r\n      \"discount_price\": null,\r\n      \"color\": \"Black\",\r\n      \"size\": \"L\",\r\n      \"in_stock\": true\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjI0NDE5fQ.jkyqC6xWjJ6YVX_uYcZH4RUXaLsaj_6kB93eyDL6Dmk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"barcode_number\": \"1234567890123\",\r\n  \"name\": \"Men's Cotton T-Shirt\",\r\n  \"category\": \"Clothing\",\r\n  \"material\": \"Cotton\",\r\n  \"description\": \"A comfortable and stylish cotton T-shirt for men.\",\r\n  \"image_url\": \"https://example.com/images/mens-tshirt.jpg\",\r\n  \"brand\": \"FashionCo\",\r\n  \"product_variant\": [\r\n    {\r\n      \"sku\": 50,\r\n      \"cost_price\": 10,\r\n      \"selling_price\": 19,\r\n      \"discount_price\": 15,\r\n      \"color\": \"Blue\",\r\n      \"size\": \"M\",\r\n      \"in_stock\": true\r\n    },\r\n    {\r\n      \"sku\": 30,\r\n      \"cost_price\": 10,\r\n      \"selling_price\": 19,\r\n      \"discount_price\": null,\r\n      \"color\": \"Black\",\r\n      \"size\": \"L\",\r\n      \"in_stock\": true\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -135,7 +369,46 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/products/:product_id",
+							"raw": "http://localhost:8000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjI0NDE5fQ.jkyqC6xWjJ6YVX_uYcZH4RUXaLsaj_6kB93eyDL6Dmk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"product_variants\": [\r\n    {\r\n      \"product_id\": \"67cf28bed1e546c1c5f06a35\",\r\n      \"variant_id\": \"67cf28bed1e546c1c5f06a36\",\r\n      \"store_id\": \"67cf125728eff271f4de96a0\",\r\n      \"quantity\": 10\r\n    },\r\n    {\r\n      \"product_id\": \"67cf28bed1e546c1c5f06a35\",\r\n      \"variant_id\": \"67cf28bed1e546c1c5f06a37\",\r\n      \"store_id\": \"67cf125728eff271f4de96a0\",\r\n      \"quantity\": 5\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/assign",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -144,13 +417,47 @@
 							"path": [
 								"api",
 								"products",
-								":product_id"
-							],
-							"variable": [
+								"assign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "product_id",
-									"value": "67cc20874f3d55c5c242572d"
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NmMDE1M2JlOTM3ZDBkZjg5ZTI2ZDciLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNzQxNjI0NDYyfQ.NFzG6iF9kYYsjMvOcJFY4uELA25qbafMkbSxdZeltxk",
+									"type": "string"
 								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"product_variants\": [\r\n    {\r\n      \"product_id\": \"67cf28bed1e546c1c5f06a35\",\r\n      \"variant_id\": \"67cf28bed1e546c1c5f06a36\"\r\n    },\r\n    {\r\n      \"product_id\": \"67cf28bed1e546c1c5f06a35\",\r\n      \"variant_id\": \"67cf28bed1e546c1c5f06a37\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/confirm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"confirm"
 							]
 						}
 					},
@@ -178,7 +485,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"customer_id\": \"64f1b2c8e4b0d1a2b3c4d5e1\",\r\n  \"user_id\": \"64f1b2c8e4b0d1a2b3c4d5e2\",\r\n  \"store_id\": \"64f1b2c8e4b0d1a2b3c4d5e3\",\r\n  \"products\": [\r\n    {\r\n      \"product_id\": \"64f1b2c8e4b0d1a2b3c4d5e4\",\r\n      \"quantity\": 2,\r\n      \"price\": 30\r\n    },\r\n    {\r\n      \"product_id\": \"64f1b2c8e4b0d1a2b3c4d5e5\",\r\n      \"quantity\": 1,\r\n      \"price\": 100\r\n    }\r\n  ],\r\n  \"discount\": 10,\r\n  \"discount_value\": 44,\r\n  \"payment_method\": \"cash\"\r\n}",
+							"raw": "{\r\n  \"user_id\": \"64f1b2c8e4b0d1a2b3c4d5e2\",\r\n  \"store_id\": \"64f1b2c8e4b0d1a2b3c4d5e3\",\r\n  \"products\": [\r\n    {\r\n      \"product_id\": \"64f1b2c8e4b0d1a2b3c4d5e4\",\r\n      \"quantity\": 2,\r\n      \"price\": 30\r\n    },\r\n    {\r\n      \"product_id\": \"64f1b2c8e4b0d1a2b3c4d5e5\",\r\n      \"quantity\": 1,\r\n      \"price\": 100\r\n    }\r\n  ],\r\n  \"discount\": 10,\r\n  \"discount_value\": 44,\r\n  \"payment_method\": \"cash\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -204,11 +511,471 @@
 		},
 		{
 			"name": "Customers",
-			"item": []
+			"item": [
+				{
+					"name": "create customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"987-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/customers/:customer_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"customers",
+								":customer_id"
+							],
+							"variable": [
+								{
+									"key": "customer_id",
+									"value": "67cefee99d6753935ee9a6c5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/customers/:customer_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"customers",
+								":customer_id"
+							],
+							"variable": [
+								{
+									"key": "customer_id",
+									"value": "67cefee99d6753935ee9a6c5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/customers/:customer_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"customers",
+								":customer_id"
+							],
+							"variable": [
+								{
+									"key": "customer_id",
+									"value": "67cefec39d6753935ee9a6c2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "67cefec39d6753935ee9a6c2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Stores",
-			"item": []
+			"item": [
+				{
+					"name": "create store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"SuperMart\",\r\n  \"location\": \"123 Main Street, Cityville\",\r\n  \"manager_id\": \"67cf0153be937d0df89e26d7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/stores",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"location\": \"456 Main Street, Cityville\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/stores/:store_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"stores",
+								":store_id"
+							],
+							"variable": [
+								{
+									"key": "store_id",
+									"value": "67cf11f128eff271f4de9697"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/stores/:store_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"stores",
+								":store_id"
+							],
+							"variable": [
+								{
+									"key": "store_id",
+									"value": "67cf11f128eff271f4de9697"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get store",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/stores/:store_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"stores",
+								":store_id"
+							],
+							"variable": [
+								{
+									"key": "store_id",
+									"value": "67cf125728eff271f4de96a0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get stores",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/stores",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"stores"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "67cf125728eff271f4de96a0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Auth",
@@ -216,11 +983,14 @@
 				{
 					"name": "login",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"owner\",\r\n  \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n  \"username\": \"user\",\r\n  \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -237,6 +1007,240 @@
 							"path": [
 								"auth-api",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "create transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"SuperMart\",\r\n  \"location\": \"123 Main Street, Cityville\",\r\n  \"manager_id\": \"67cf0153be937d0df89e26d7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"location\": \"456 Main Street, Cityville\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transactions/:transaction_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transactions",
+								":transaction_id"
+							],
+							"variable": [
+								{
+									"key": "transaction_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transactions/:transaction_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transactions",
+								":transaction_id"
+							],
+							"variable": [
+								{
+									"key": "transaction_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transactions/:transaction_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transactions",
+								":transaction_id"
+							],
+							"variable": [
+								{
+									"key": "transaction_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2N2NiZmRiYWMyOWJkMzRkMGY5ZjlmM2UiLCJpc0xvZ2dlZEluIjp0cnVlLCJyb2xlIjoib3duZXIiLCJ1c2VyTmFtZSI6Im93bmVyIiwiaWF0IjoxNzQxNjE4NjE4fQ.M5L-KDREqpcv8VmrOSHc60hZOiLQiGx5t3EQj0JU5qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"phone\": \"123-654-3210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "67cf125728eff271f4de96a0",
+									"disabled": true
+								}
 							]
 						}
 					},

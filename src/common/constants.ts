@@ -1,4 +1,4 @@
-import { User, UserRole } from 'src/users/dtos/user.dto';
+import { User, UserRole } from 'src/users/user.dto';
 
 export const UUID_NAMESPACE = 'dd6eb088-ee10-53de-b91b-4800453c4746';
 

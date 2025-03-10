@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { TransactionService } from './services/transaction.service';
-import { TransactionsAdminController } from './controllers/transactions.controller';
-import { Transaction, TransactionSchema } from './schemas/transaction.schema';
-import { TransactionRepository } from './repositories/transaction.repository';
+import { TransactionService } from './transaction.service';
+import { TransactionsAdminController } from './transactions.controller';
+import { Transaction, TransactionSchema } from './transaction.schema';
+import { TransactionRepository } from './transaction.repository';
 
 @Module({
   imports: [
